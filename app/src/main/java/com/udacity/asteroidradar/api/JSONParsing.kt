@@ -6,7 +6,6 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 fun parseAsteroidsJSONResult(resultJSON: JSONObject): List<Asteroid> = buildList {
     val nearEarthObjectsJSON = resultJSON.getJSONObject("near_earth_objects")
