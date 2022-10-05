@@ -7,7 +7,7 @@
 
         <variable
             name="asteroid"
-            type="com.udacity.asteroidradar.ui.Asteroid" />
+            type="com.udacity.asteroidradar.api.Asteroid" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -51,7 +51,6 @@
                         android:textColor="@color/default_text_color" />
 
                     <TextView
-                        android:id="@+id/close_approach_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -80,7 +79,6 @@
                             android:textColor="@color/default_text_color" />
 
                         <TextView
-                            android:id="@+id/absolute_magnitude"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
@@ -94,7 +92,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="16dp"
-                        app:srcCompat="@drawable/ic_help_circle" />
+                        app:srcCompat="@drawable/ic_help_circle"
+                        android:contentDescription="@string/astronomical_unit_explanation_button"/>
 
                 </LinearLayout>
 
@@ -106,7 +105,6 @@
                     android:textColor="@color/default_text_color" />
 
                 <TextView
-                    android:id="@+id/estimated_diameter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -122,7 +120,6 @@
                     android:textColor="@color/default_text_color" />
 
                 <TextView
-                    android:id="@+id/relative_velocity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
