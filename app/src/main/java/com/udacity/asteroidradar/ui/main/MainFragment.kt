@@ -5,8 +5,8 @@ import android.view.*
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.asteroidradar.R
-import com.example.asteroidradar.databinding.FragmentMainBinding
+import com.udacity.asteroidradar.R
+import com.udacity.asteroidradar.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
