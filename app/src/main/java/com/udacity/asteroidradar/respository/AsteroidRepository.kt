@@ -3,7 +3,6 @@ package com.udacity.asteroidradar.respository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.udacity.asteroidradar.Constants
-import com.udacity.asteroidradar.database.Asteroid
 import com.udacity.asteroidradar.database.AsteroidDao
 import com.udacity.asteroidradar.network.ImageOfTheDay
 import com.udacity.asteroidradar.network.Network
@@ -14,10 +13,13 @@ import java.util.*
 
 class AsteroidRepository(private val asteroidDao: AsteroidDao) {
     /**
-     * The current list of asteroids stored in the database.
+     * The current list of asteroids stored in the database,
+     * filtering out asteroids from the past.
      */
-    val asteroids: LiveData<List<Asteroid>> by lazy {
-        asteroidDao.getAsteroids()
+    val asteroids by lazy {
+        val dateFormat = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT, Locale.getDefault())
+        val today = Calendar.getInstance().time
+        asteroidDao.getAsteroidsFromDate(dateFormat.format(today))
     }
 
     /**

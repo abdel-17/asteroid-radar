@@ -9,11 +9,13 @@ import androidx.room.Query
 @Dao
 interface AsteroidDao {
     /**
+     * @param date The date from which asteroids are fetched.
+     *
      * @return The list of asteroids stored in the database
      * ordered by their `closeApproachDate` property.
      */
-    @Query("SELECT * FROM Asteroid ORDER BY closeApproachDate DESC")
-    fun getAsteroids(): LiveData<List<Asteroid>>
+    @Query("SELECT * FROM Asteroid WHERE closeApproachDate >= :date ORDER BY closeApproachDate DESC")
+    fun getAsteroidsFromDate(date: String): LiveData<List<Asteroid>>
 
     /**
      * Inserts the given list of asteroids in the database,
