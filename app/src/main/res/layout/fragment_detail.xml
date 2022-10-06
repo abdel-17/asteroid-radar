@@ -28,7 +28,6 @@
             app:layout_constraintHeight_percent="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_margin="16dp"
             app:statusImage="@{asteroid.potentiallyHazardous}"
             app:statusImageDescription="@{asteroid.potentiallyHazardous}"
             tools:ignore="contentDescription"
@@ -45,7 +44,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp">
+                android:padding="16dp">
 
                 <TextView
                     android:id="@+id/text_asteroid_approach_date_title"
