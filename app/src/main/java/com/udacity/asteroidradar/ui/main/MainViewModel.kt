@@ -1,7 +1,6 @@
 package com.udacity.asteroidradar.ui.main
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
@@ -60,20 +59,20 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val imageOfTheDay: LiveData<ImageOfTheDay>
         get() = repository.imageOfTheDay
 
-//    /**
-//     * The backing property for [errorMessage]
-//     * for sending error messages.
-//     */
-//    private val _errorMessage = MutableLiveData<String?>()
-//
-//    /**
-//     * Error messages are sent through this live data.
-//     *
-//     * Call [onReceivedErrorMessage] after receiving
-//     * a message from this live data.
-//     */
-//    val errorMessage: LiveData<String?>
-//        get() = _errorMessage
+    /**
+     * The backing property for [errorMessage]
+     * for sending error messages.
+     */
+    private val _errorMessage = MutableLiveData<String?>()
+
+    /**
+     * Error messages are sent through this live data.
+     *
+     * Call [onReceivedErrorMessage] after receiving
+     * a message from this live data.
+     */
+    val errorMessage: LiveData<String?>
+        get() = _errorMessage
 
     init {
         viewModelScope.launch {
@@ -81,8 +80,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 repository.refreshImageOfTheDay()
                 repository.refreshAsteroids()
             } catch (e: Exception) {
-//                _errorMessage.value = "Connection error: ${e.message}"
-                Log.i("ViewModel", "Connection error: ${e.message}")
+                _errorMessage.value = "Connection error: ${e.message}"
             }
         }
     }
@@ -95,14 +93,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _filter.value = filter
     }
 
-//    /**
-//     * Resets the value of [errorMessage] to null.
-//     *
-//     * Must be called after receiving the error
-//     * to prevent it from being sent again
-//     * on configuration changes.
-//     */
-//    fun onReceivedErrorMessage() {
-//        _errorMessage.value = null
-//    }
+    /**
+     * Resets the value of [errorMessage] to null.
+     *
+     * Must be called after receiving the error
+     * to prevent it from being sent again
+     * on configuration changes.
+     */
+    fun onReceivedErrorMessage() {
+        _errorMessage.value = null
+    }
 }
