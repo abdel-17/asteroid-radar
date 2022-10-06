@@ -7,7 +7,6 @@ import com.udacity.asteroidradar.database.Asteroid
 import com.udacity.asteroidradar.database.AsteroidDao
 import com.udacity.asteroidradar.network.ImageOfTheDay
 import com.udacity.asteroidradar.network.Network
-import com.udacity.asteroidradar.network.parseAsteroidsJSONResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
