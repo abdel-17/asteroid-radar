@@ -7,7 +7,7 @@
 
         <variable
             name="asteroid"
-            type="com.udacity.asteroidradar.api.Asteroid" />
+            type="com.udacity.asteroidradar.database.Asteroid" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,12 +19,10 @@
             android:id="@+id/text_asteroid_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="@{asteroid.codename}"
             android:textAppearance="@style/TextAppearanceSubtitle"
-            app:layout_constraintBottom_toTopOf="@+id/text_asteroid_date"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/text_asteroid_date"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="68347 (2001 KB67)" />
 
@@ -32,13 +30,14 @@
             android:id="@+id/text_asteroid_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:text="@{asteroid.closeApproachDate}"
             android:textAppearance="@style/TextAppearanceBody"
             android:textColor="@color/text_grey"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/text_asteroid_name"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_asteroid_name"
             tools:text="2020-02-08" />
 
@@ -46,9 +45,9 @@
             android:id="@+id/image_item_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

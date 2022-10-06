@@ -5,14 +5,10 @@ import android.view.*
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.udacity.asteroidradar.R
 import com.udacity.asteroidradar.databinding.FragmentMainBinding
-import kotlinx.coroutines.launch
 
 class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
@@ -24,9 +20,9 @@ class MainFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentMainBinding.inflate(inflater)
+        binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -44,11 +40,6 @@ class MainFragment : Fragment() {
             // Update the recycler view's list.
             asteroidListAdapter.submitList(asteroidList)
         }
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.errorMessage.collect { message -> showSnackbar(message) }
-            }
-        }
         requireActivity().addMenuProvider(menuProvider, viewLifecycleOwner)
     }
 
@@ -63,10 +54,12 @@ class MainFragment : Fragment() {
     }
 
     /**
-     * Shows a snackbar on the screen for [duration] milliseconds.
+     * Shows a [Snackbar] for [duration] milliseconds.
      */
     private fun showSnackbar(message: String, duration: Int = Snackbar.LENGTH_LONG) {
         Snackbar.make(
+            // We use `android.R.id.content` to show the snackbar correctly.
+            // Using `this.view` is not correct for this use case.
             requireActivity().findViewById(android.R.id.content), message, duration
         ).show()
     }
