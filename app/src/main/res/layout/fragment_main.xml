@@ -16,22 +16,26 @@
         android:layout_height="match_parent"
         android:background="@color/app_background">
 
+        <!-- Constraint the max height of the image to 50% to
+         prevent it from taking up too much space in landscape. -->
         <FrameLayout
             android:id="@+id/activity_main_image_of_the_day_layout"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_max="wrap"
+            app:layout_constraintHeight_percent="0.5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/activity_main_image_of_the_day"
+                android:id="@+id/image_asteroid_status"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
-                app:imageOfTheDay="@{viewModel.imageOfTheDay}"
-                app:imageOfTheDayDescription="@{viewModel.imageOfTheDay}"
+                app:imageOfTheDay="@{viewModel.repository.imageOfTheDay}"
+                app:imageOfTheDayDescription="@{viewModel.repository.imageOfTheDay}"
                 app:srcCompat="@drawable/placeholder_picture_of_day"
                 tools:ignore="contentDescription" />
 
@@ -40,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:background="#55010613"
+                android:background="@color/background_gray"
                 android:padding="16dp"
                 android:text="@string/image_of_the_day"
                 android:textAppearance="@style/TextAppearanceTitle" />

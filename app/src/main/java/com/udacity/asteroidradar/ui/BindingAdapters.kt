@@ -7,8 +7,17 @@ import com.squareup.picasso.Picasso
 import com.udacity.asteroidradar.R
 import com.udacity.asteroidradar.network.ImageOfTheDay
 
+@BindingAdapter("imageOfTheDay")
+fun ImageView.bindImageOfTheDay(imageOfTheDay: ImageOfTheDay?) {
+    if (imageOfTheDay == null || !imageOfTheDay.isImage) return
+    Picasso.get()
+        .load(imageOfTheDay.url)
+        .placeholder(R.drawable.placeholder_picture_of_day)
+        .into(this)
+}
+
 @BindingAdapter("statusIcon")
-fun ImageView.bindAsteroidStatusImage(isHazardous: Boolean) {
+fun ImageView.bindStatusIcon(isHazardous: Boolean) {
     setImageResource(
         if (isHazardous)
             R.drawable.ic_status_potentially_hazardous
@@ -17,20 +26,14 @@ fun ImageView.bindAsteroidStatusImage(isHazardous: Boolean) {
     )
 }
 
-@BindingAdapter("statusIconDescription")
-fun ImageView.bindAsteroidStatusImageDescription(isHazardous: Boolean) {
-    contentDescription = if (isHazardous)
-        context.getString(R.string.potentially_hazardous_asteroid_image)
-    else
-        context.getString(R.string.non_hazardous_asteroid_image)
-}
-
-@BindingAdapter("imageOfTheDay")
-fun ImageView.bindImageOfTheDay(imageOfTheDay: ImageOfTheDay?) {
-    if (imageOfTheDay == null || !imageOfTheDay.isImage) return
-    Picasso.get()
-        .load(imageOfTheDay.url)
-        .into(this)
+@BindingAdapter("statusImage")
+fun ImageView.bindStatusImage(isHazardous: Boolean) {
+    setImageResource(
+        if (isHazardous)
+            R.drawable.asteroid_hazardous
+        else
+            R.drawable.asteroid_safe
+    )
 }
 
 @BindingAdapter("imageOfTheDayDescription")
@@ -41,14 +44,20 @@ fun ImageView.bindImageOfTheDayDescription(imageOfTheDay: ImageOfTheDay?) {
     }
 }
 
-@BindingAdapter("asteroidStatusImage")
-fun ImageView.bindDetailsStatusImage(isHazardous: Boolean) {
-    setImageResource(
-        if (isHazardous)
-            R.drawable.asteroid_hazardous
-        else
-            R.drawable.asteroid_safe
-    )
+@BindingAdapter("statusImageDescription")
+fun ImageView.bindStatusImageDescription(isHazardous: Boolean) {
+    contentDescription = if (isHazardous)
+        context.getString(R.string.potentially_hazardous_asteroid_image)
+    else
+        context.getString(R.string.non_hazardous_asteroid_image)
+}
+
+@BindingAdapter("statusDescription")
+fun ImageView.bindStatusDescription(isHazardous: Boolean) {
+    contentDescription = if (isHazardous)
+        context.getString(R.string.potentially_hazardous_asteroid)
+    else
+        context.getString(R.string.non_hazardous_asteroid)
 }
 
 @BindingAdapter("astronomicalUnitText")
