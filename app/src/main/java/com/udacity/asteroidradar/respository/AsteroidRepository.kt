@@ -58,6 +58,8 @@ class AsteroidRepository(private val asteroidDao: AsteroidDao) {
      */
     suspend fun refreshImageOfTheDay() {
         // We use `postValue` to set its value on the main thread.
-        _imageOfTheDay.postValue(Network.nasaService.getImageOfTheDay())
+        withContext(Dispatchers.IO) {
+            _imageOfTheDay.postValue(Network.nasaService.getImageOfTheDay())
+        }
     }
 }
