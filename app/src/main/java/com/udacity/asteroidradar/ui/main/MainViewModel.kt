@@ -77,7 +77,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     init {
         viewModelScope.launch {
             try {
-                repository.refreshData()
+                repository.refreshImageOfTheDay()
+                repository.refreshAsteroids()
             } catch (e: Exception) {
                 _errorMessage.value = "Connection error: ${e.message}"
             }
