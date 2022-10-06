@@ -2,13 +2,13 @@ package com.udacity.asteroidradar.ui.main
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.udacity.asteroidradar.database.AsteroidDatabase
 import com.udacity.asteroidradar.respository.AsteroidRepository
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
@@ -29,14 +29,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     /**
      * The backing property for [errorMessage]
-     * for emitting error messages.
+     * for sending error messages.
      */
-    private val _errorMessage = MutableSharedFlow<String>()
+    private val _errorMessage = MutableLiveData<String?>()
 
     /**
-     * Error messages are emitted through this flow.
+     * Error messages are sent through this live data.
+     *
+     * Call [onReceivedErrorMessage] after receiving
+     * a message from this live data.
      */
-    val errorMessage: SharedFlow<String>
+    val errorMessage: LiveData<String?>
         get() = _errorMessage
 
     init {
@@ -44,8 +47,19 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             try {
                 repository.refreshData()
             } catch (e: Exception) {
-                _errorMessage.emit("Connection error: ${e.message}")
+                _errorMessage.value = "Connection error: ${e.message}"
             }
         }
+    }
+
+    /**
+     * Resets the value of [errorMessage] to null.
+     *
+     * Must be called after receiving the error
+     * to prevent it from being sent again
+     * on configuration changes.
+     */
+    fun onReceivedErrorMessage() {
+        _errorMessage.value = null
     }
 }
