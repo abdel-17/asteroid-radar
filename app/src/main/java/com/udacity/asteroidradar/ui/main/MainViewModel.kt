@@ -1,13 +1,11 @@
 package com.udacity.asteroidradar.ui.main
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.udacity.asteroidradar.database.AsteroidDatabase
+import com.udacity.asteroidradar.network.ImageOfTheDay
 import com.udacity.asteroidradar.respository.AsteroidRepository
 import kotlinx.coroutines.launch
 
@@ -32,9 +30,34 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     /**
      * The repository used to fetch and cache data.
      */
-    val repository = AsteroidRepository(
+    private val repository = AsteroidRepository(
         asteroidDao = AsteroidDatabase.getInstance(application).dao
     )
+
+    /**
+     * The filter applied on the stored asteroid list.
+     */
+    private val _filter = MutableLiveData<AsteroidFilter?>(null)
+
+    /**
+     * The list of shown asteroids.
+     *
+     * The value of this property is updated
+     * when new data is fetched or a new filter
+     * is applied with [applyFilter].
+     */
+    val asteroids = repository.asteroids.switchMap { asteroids ->
+        _filter.map { filter ->
+            // If the filter is `null`, the original list is returned.
+            filter?.appliedOn(asteroids) ?: asteroids
+        }
+    }
+
+    /**
+     * The image of the day fetched from the network.
+     */
+    val imageOfTheDay: LiveData<ImageOfTheDay>
+        get() = repository.imageOfTheDay
 
     /**
      * The backing property for [errorMessage]
@@ -59,6 +82,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 _errorMessage.value = "Connection error: ${e.message}"
             }
         }
+    }
+
+    /**
+     * Applies [filter] on the asteroid list,
+     * showing the entire list if it's `null`.
+     */
+    fun applyFilter(filter: AsteroidFilter?) {
+        _filter.value = filter
     }
 
     /**

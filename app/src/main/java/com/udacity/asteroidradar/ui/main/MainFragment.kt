@@ -36,7 +36,7 @@ class MainFragment : Fragment() {
             )
         }
         binding.asteroidRecycler.adapter = asteroidListAdapter
-        viewModel.repository.asteroids.observe(viewLifecycleOwner) { asteroids ->
+        viewModel.asteroids.observe(viewLifecycleOwner) { asteroids ->
             // Update the recycler view's list.
             asteroidListAdapter.submitList(asteroids)
         }
@@ -56,6 +56,14 @@ class MainFragment : Fragment() {
         }
 
         override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+            viewModel.applyFilter(
+                when (val id = menuItem.itemId) {
+                    R.id.show_all_menu -> null
+                    R.id.show_today_menu -> AsteroidFilter.TODAY
+                    R.id.show_week_menu -> AsteroidFilter.THIS_WEEK
+                    else -> error("Unknown menu item id: $id")
+                }
+            )
             return true
         }
     }

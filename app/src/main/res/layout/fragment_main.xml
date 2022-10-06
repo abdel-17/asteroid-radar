@@ -33,8 +33,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                app:imageOfTheDay="@{viewModel.repository.imageOfTheDay}"
-                app:imageOfTheDayDescription="@{viewModel.repository.imageOfTheDay}"
+                app:imageOfTheDay="@{viewModel.imageOfTheDay}"
+                app:imageOfTheDayDescription="@{viewModel.imageOfTheDay}"
                 app:srcCompat="@drawable/placeholder_picture_of_day"
                 tools:ignore="contentDescription" />
 
