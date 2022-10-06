@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.udacity.asteroidradar.databinding.AsteroidItemBinding
-import com.udacity.asteroidradar.api.Asteroid
+import com.udacity.asteroidradar.database.Asteroid
 
 class AsteroidListAdapter(
     private val onItemClick: (Asteroid) -> Unit
@@ -26,7 +26,7 @@ class AsteroidViewHolder private constructor(
     companion object {
         fun fromParent(parent: ViewGroup): AsteroidViewHolder {
             val inflater = LayoutInflater.from(parent.context)
-            val binding = AsteroidItemBinding.inflate(inflater)
+            val binding = AsteroidItemBinding.inflate(inflater, parent, false)
             return AsteroidViewHolder(binding)
         }
     }
