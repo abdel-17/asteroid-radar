@@ -42,11 +42,11 @@ object Network {
         // Retrofit creates the service with the moshi converter
         // and scalars converter, which is needed for converting
         // the JSON response to a string.
-        val retrofit = Retrofit.Builder()
+        Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
-        retrofit.create(NasaService::class.java)
+            .create(NasaService::class.java)
     }
 }
