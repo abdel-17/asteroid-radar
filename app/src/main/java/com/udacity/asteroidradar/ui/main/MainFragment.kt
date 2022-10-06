@@ -40,11 +40,11 @@ class MainFragment : Fragment() {
             // Update the recycler view's list.
             asteroidListAdapter.submitList(asteroids)
         }
-        viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
-            // Show a snackbar with the network error's message.
-            if (message != null) showSnackbar(message)
-            viewModel.onReceivedErrorMessage()
-        }
+//        viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
+//            // Show a snackbar with the network error's message.
+//            if (message != null) showSnackbar(message)
+//            viewModel.onReceivedErrorMessage()
+//        }
         // Add an options menu. We pass `viewLifecycleOwner`
         // to remove it when the view is destroyed.
         requireActivity().addMenuProvider(menuProvider, viewLifecycleOwner)
