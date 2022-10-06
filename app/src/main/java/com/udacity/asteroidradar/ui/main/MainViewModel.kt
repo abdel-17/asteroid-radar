@@ -13,6 +13,15 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     companion object {
+        /**
+         * @param application An instance of the application.
+         *
+         * @return A factory for initializing this view model.
+         *
+         * ViewModel objects should never be manually initialized.
+         * The factory class manages creating and saving the
+         * view model instances.
+         */
         fun provideFactory(application: Application) = viewModelFactory {
             initializer {
                 MainViewModel(application)
