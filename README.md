@@ -12,7 +12,7 @@ This kind of app is one of the most usual in the real world, what you will learn
 
 <img src="./screenshots/Main.png" width=300 align=left>
 <img src="./screenshots/NonHazardousDetail.png" width=300 align=left>
-<img src="./screenshots/HazardousDetail.png" width=300 align=left>
+<img src="./screenshots/HazardousDetail.png" width=300 align=bottom>
 
 ## Project Instructions
 
